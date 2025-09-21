@@ -32,6 +32,11 @@ def backup_files_dir(source: str, destination: str):
     else:
         print(f"File size is: {dir_size_mb:.2f}MB")
 
+def backup_file(source: str, destination: str, filename: str):
+    os.makedirs(destination, exist_ok=True)
+    file = os.path.join(source, filename)
+    shutil.copy2(file, destination)
+
 def check_dir_size(path: str):
     files: list = get_files_in_dir(path)
 
@@ -40,3 +45,8 @@ def check_dir_size(path: str):
         size += os.path.getsize(file)
 
     return size
+
+def delete_file(path:str, filename: str):
+    file = os.path.join(path, filename)
+    os.remove(file)
+    print(f"File has been removed: {filename}")
